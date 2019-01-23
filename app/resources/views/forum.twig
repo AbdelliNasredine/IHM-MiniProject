@@ -1,0 +1,98 @@
+{% extends 'layout.twig' %} 
+
+{% block content1 %}
+	<div class="container py-3">
+	<div class="card bg-success text-light py-3">
+	  <div class="card-body">
+	    <h3 class="card-title">Bienvenu dans le forum</h3>
+	    <p class="card-text text-m">ici tu peut metre votre nouvelle Discussion</p>
+		<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#my-modal" id="btn-suject"><i class="fas fa-plus-square px-2"></i></i>nouveau suject</button>
+		<div class="modal fade " id="my-modal">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title text-dark">Suject</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		      </div>
+		      <div class="modal-body">
+		        <form method="post" action="/add/suject">
+		        	<div class="form-group row">
+		        		<label for="input1" class="col-sm-3 col-form-label text-muted" >Titre <span class="text-danger">*</span> </label>
+		        		<div class="col-sm-9">
+		        			<input name="titre" class="form-control" id="input1" type="text" required>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="select" class="col-sm-3 col-form-label  text-muted" >Categorie</label>
+		        		<div class="col-sm-9">
+		        	        <select class="form-control" id="select" name="categorie">
+					          <option value="1">Informatique</option>
+					          <option value="2">Electronique</option>
+					          <option value="3">Mathématique</option>
+					          <option value="4">Physique</option>
+					    	</select>
+					    	<small id="passwordHelpBlock" class="form-text text-muted">
+						  		Informatique par defaut
+							</small>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="input1" class="col-sm-3 col-form-label text-muted" >Détaile <span class="text-danger">*</span></label>
+		        		<div class="col-sm-9">
+		        			<textarea class="form-control" name="suject" rows="20" id="texteditor"></textarea>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<p class="col-sm-3 text-muted"><span class="text-danger">*</span> champ obligatoire</p>
+		        	</div>		        	
+		        	<div class="form-group">
+		        		<input class="text-center col-sm-12 btn btn-warning" type="submit" value="Poser">
+		        	</div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<hr>
+	{% for key , value in allForum %}		
+		<div class="card list-group my-3">
+		  <a href="/forum" class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center font-weight-bold">
+		    {{ key }}
+		    <span class="badge badge-light bg-white badge-pill ">{{ value.nb }} suject</span>
+		  </a>
+		  {% for item in value.sujects %}
+		  		<a href="/forum/{{item.categorie_id}}/{{item.suject_id}}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+		  			<span>
+		  				<i class="fas fa-question-circle pr-3 text-primary"></i>
+		  				<span class="font-weight-bold"> {{ item.suject_title }} </span>
+		  			</span>
+		  			<span class="px-3 " style=" color : rgba(0,0,0,0.5);"> par <span class="font-weight-bold px-1">{{ item.user_name }}</span> le {{ item.suject_date }}
+		  			</span>
+  				</a>
+		  {% endfor %}
+		</div>
+	{% endfor %} 
+	</div>
+{% endblock %}
+{% block script %}
+	<script>
+		$(document).ready(
+			$('#btn-suject').click(function() {
+				$('#texteditor').summernote({
+					  	toolbar: [
+					    // [groupName, [list of button]]
+					    ['style', ['bold', 'italic', 'underline', 'clear']],
+					    ['font', ['strikethrough', 'superscript', 'subscript']],
+					    ['fontsize', ['fontsize']],
+					    ['color', ['color']],
+					    ['para', ['ul', 'ol', 'paragraph']],
+					    ['height', ['height']]
+					  ]
+					}
+				);
+			})
+		);
+	</script>
+{% endblock %}

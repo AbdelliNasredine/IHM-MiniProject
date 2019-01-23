@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ base_url() }}/app/resources/img/favicon.png">
+    <title> {{ page.title }} </title>
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/summernote-bs4.css">
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/all.css">
+</head>
+<body>
+	{% include 'partials/flash.twig' %}
+	{% include 'partials/navigation.twig' %}
+	{% if  auth.check %}
+		{% include 'partials/spacenav.twig' %}
+		{% block content1 %}
+		{% endblock %}
+	{% else %}
+		{% block content %}
+		{% endblock %}
+	{% endif %}				
+	{% include 'partials/footer.twig' %}
+	<script src="{{ base_url() }}/app/resources/js/jquery.js"></script>
+	<script src="{{ base_url() }}/app/resources/js/bootstrap.js"></script>
+	<script src="{{ base_url() }}/app/resources/js/summernote-bs4.js"></script>
+	{% block script %}
+	{% endblock %}
+</body>	

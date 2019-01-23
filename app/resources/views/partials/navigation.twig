@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+	<div class="container">
+		<a class="navbar-brand" href="/">
+			<img src="{{base_url()}}\app\resources\img\tt.svg" width="30" height="30" alt="logo">
+		</a>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item dropdown ">
+					<a class="nav-link dropdown-toggle connect " href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						{% if auth.check %}
+							<i class="fas fa-user px-2"></i>
+							{{ auth.user[0]['user_email'] }}
+						{% else %}
+							<i class="fas fa-sign-in-alt px-2"></i>Connecter
+						{% endif %}
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						{% if  auth.check %}
+							<a class="dropdown-item" href="/options">
+								<i class="fas fa-cog pr-4"></i>Options
+							</a>
+    						<a class="dropdown-item" href="{{ path_for('deconnecter') }}">
+    							<i class="fas fa-sign-out-alt pr-4"></i>Deconnecter
+    						</a>
+						{% else %} 
+							<form class="px-4 py-3" action="/conection" method="post" >
+							    <div class="form-group">
+								      <label for="exampleDropdownFormEmail1" class="font-weight-bold"><i class="fas fa-at pr-2"></i>Email address</label>
+								      <input name="email" type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" required>
+							    </div>
+								<div class="form-group">
+								      <label for="exampleDropdownFormPassword1" class="font-weight-bold" ><i class="fas fa-key pr-2"></i>Mot de pass</label>
+								      <input name="password" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Mote de pass" required>
+							    </div>
+							    <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-sign-in-alt px-2"></i>Connecter</button>
+							</form>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="/inscription">Nouveaux Utilisateur? S'inscrire ici</a>
+						{% endif %}
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>

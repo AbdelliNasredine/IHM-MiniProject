@@ -1,0 +1,22 @@
+{% extends 'layout.twig' %} 
+
+{% block content1 %}
+	<div class="cour jumbotron py-5  text-white bg-success">
+		<div class="container p-3">
+			<h1 class="display-4 pb-4">{{ single.0.cours_title }}</h1>
+			<p class="lead ">{{ single.0.cours_disc }}</p>
+			<p class="lead">
+				<span>Poser par</span>
+				<span class="text-white font-weight-bold">
+					Admin
+				</span>
+			</p>
+		</div>
+	</div>
+	<div class="container coursbody p-3 mb-4 ">
+		{% autoescape %}
+			{{ single.0.cours_content|raw }} 
+		{% endautoescape %}
+	</div>
+{% endblock %}
+

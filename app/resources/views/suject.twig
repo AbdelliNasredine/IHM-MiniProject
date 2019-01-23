@@ -1,0 +1,128 @@
+{% extends 'layout.twig' %} 
+
+{% block content1 %}
+<nav aria-label="breadcrumb">
+<div class="container">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><i class="fas fa-home"></i></li>
+	    <li class="breadcrumb-item">Forum</li>
+	    <li class="breadcrumb-item active" aria-current="page">
+	    	{% if all.suject.categorie_id == '1' %}
+	    		Informatique
+	    	{% else %}
+	    		{% if all.suject.categorie_id == '2' %}
+	    			Electronique
+	    		{% else %}
+	    			{% if all.suject.categorie_id == '3' %}
+	    				Mathématique
+	    			{% else %}
+	    				{% if all.suject.categorie_id == '4' %}
+	    					Physique
+	    				{% endif %}
+	    			{% endif %}
+	    		{% endif %}
+	    	{% endif %}
+	    </li>
+	 </ol>
+</div>	
+</nav>
+<div class="container py-3">
+	<div class="list-group grid">
+		<div class="left py-3 text-center">
+			<img class="avatar img-circle img-thumbnail rounded-circle" src=
+				{% if all.suject.user_img is empty %}
+					" {{ base_url() }}\app\resources\profil\default.png "
+				{% else %}
+					" {{ base_url() }}\app\resources\profil\{{ all.suject.user_img }} "
+				{% endif %} 
+			 alt="ProfilImage" width="82" height="82">
+			<h3 class="pt-2 text-muted font-weight-bold">{{ all.suject.user_name }}</h3>
+			<span class="badge badge-success">Auteur</span>
+		</div>
+		<div class="right p-3">
+			<h4 class="text-muted font-weight-bold"><i class="fas fa-question-circle pr-2"></i>{{all.suject.suject_title}}</h4>
+			<hr>
+			<div class="text-justify py-3">
+				{% autoescape %}
+    				{{ all.suject.suject_content|raw }} 
+				{% endautoescape %}
+			</div>
+			<hr>
+			<span class="text-primary">Date : {{all.suject.suject_date}} </span>
+		</div>
+	</div>
+	<div class="list-group my-3">
+		<div class="list-group-item active">
+			{{ all.comments is empty ? 'Pas comments' : ' les comments :'  }}	
+		</div>
+	</div>
+	{% for item in all.comments %}
+		<div class="list-group grid my-3">
+			<div class="left py-3 text-center">
+				<img class="avatar img-circle img-thumbnail rounded-circle" src=
+				{% if item.user_img is empty %}
+					" {{ base_url() }}\app\resources\profil\default.png "
+				{% else %}
+					" {{ base_url() }}\app\resources\profil\{{ item.user_img }} "
+				{% endif %}
+				alt="ProfilImage" width="82" height="82">
+				<h3 class="pt-2 text-muted">{{ item.user_name }}</h3>
+			</div>
+			<div class="right p-3">
+				<div class="text-justify py-3">
+					{% autoescape %}
+	    				{{ item.comment_content|raw }} 
+					{% endautoescape %}
+				</div>
+				<hr>
+				<span class="text-primary">Date : {{ item.comment_date  }} </span>
+			</div>
+		</div>
+	{% endfor %}
+	<form id="commentForm" class="formcomment p-4" action="/add/comments/{{all.suject.categorie_id}}/{{all.suject.suject_id}}" method="post" >
+	    <div class="form-group">
+	    	<h4>Commente</h4>
+	    	<hr>
+	        <textarea class="form-control" name="comment" rows="3" cols="30" id="texteditor" autofocus="autofocus" required></textarea>
+	    </div>
+	    <div class="form-group">
+	        <button type="reset" class="btn btn-default"><i class="fas fa-times px-2"></i>Anuller</button>
+	        <button type="submit" class="btn btn-success mx-2"><i class="fas fa-check px-2"></i>Commenter</button>
+	    </div>
+	</form>
+</div>
+{% endblock %}
+{% block script %}
+	<script>
+		$(document).ready(
+			function() {
+				$('#texteditor').summernote({
+					  	toolbar: [
+					    // [groupName, [list of button]]
+					    ['style', ['bold', 'italic', 'underline', 'clear']],
+					    ['font', ['strikethrough', 'superscript', 'subscript']],
+					    ['fontsize', ['fontsize']],
+					    ['color', ['color']],
+					    ['para', ['ul', 'ol', 'paragraph']],
+					    ['height', ['height']]
+					  ]
+					});
+			});
+			if($('.note-codable').val() == ''){
+				consol.log('champ vide !');
+				e.preventDefault();
+			}else{
+
+			}
+	</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

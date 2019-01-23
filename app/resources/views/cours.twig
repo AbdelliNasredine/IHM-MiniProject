@@ -1,0 +1,29 @@
+{% extends 'layout.twig' %} 
+
+{% block content1 %}
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><i class="fas fa-home"></i></li>
+	    	<li class="breadcrumb-item">Cours</li>
+		</ol>
+		<h3 class="pt-2">Les cours disponnible </h3>
+		<hr>
+		<div class="row">
+			{% for cour in cours %}
+			<div class="col-3 mb-3">
+				<div class="card " style="width: 16rem;">
+				  <div class="card-body">
+				    <h3 class="card-title font-weight-bold"><i class="fas fa-info-circle pr-2"></i>{{ cour.cours_title }}</h3>
+				    <p class="card-text text-muted">{{ cour.cours_disc }}</p>
+				    <a href="/cours/{{ cour.cours_id }}" class="btn btn-success"><i class="fas fa-arrow-alt-circle-right pr-2"></i>Voir le coure</a>
+				  </div>
+				  <div class="card-footer">
+	      			<small class="text-muted"> Ajouter le {{ cour.cours_date }}</small>
+	    		</div>
+				</div>
+			</div>
+	    {% endfor %}
+		</div>
+	</div>
+
+{% endblock %}

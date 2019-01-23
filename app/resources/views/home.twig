@@ -1,0 +1,46 @@
+{% extends 'layout.twig' %} 
+
+{% block content %}
+	<div class="home jumbotron mb-0">
+		<div class="container py-3">
+			<h1 class="display-2 pb-4">Rejoinder Nous</h1>
+			<p class="lead">et obtenir un accès illimité à l'information</p>
+			<p class="lead">
+				<a class="btn btn-warning btn-lg py-2" href="/inscription" role="button"><i class="fas fa-arrow-circle-right px-2"></i>Rejoinder  maintenant</a>
+			</p>
+		</div>
+	</div>
+	<div class="sec1">
+		<div class="ml-auto mr-auto ">
+			<img src="{{base_url()}}\app\resources\img\discuss-logo.png" width="120" height="120">
+			<h1 class="display-3">Discussion Overt</h1>
+			<p class="lead">tu peut discuter et poser des question au autre utilisateurs</p>
+		</div>
+	</div>
+	<div class="sec2 pl-2 pr-2">
+		<h1 class="text-center display-4">Avis</h1>
+		<div class="container">
+			<div class="elm1">
+				<blockquote class="blockquote text-center">
+				  <img class="avatar img-circle img-thumbnail rounded-circle" src="\app\resources\img\1.jpg" >
+				  <p class="mb-0"> Ce Site est utille </p>
+				  <footer class="blockquote-footer">Ismail Bouregga </footer>
+				</blockquote>
+			</div>
+			<div class="elm2 ">
+				<blockquote class="blockquote text-center">
+				  <img class="avatar img-circle img-thumbnail rounded-circle" src="\app\resources\img\2.jpg">
+				  <p class="mb-0">j'ai utiliser ce site et je trouve plan des personner qui mon aider</p>
+				  <footer class="blockquote-footer">Khomanni Noureddine</footer>
+				</blockquote>
+			</div>
+			<div class="elm3">
+				<blockquote class="blockquote text-center">
+				  <img class="avatar img-circle img-thumbnail rounded-circle" src="\app\resources\img\3.jpg">
+				  <p class="mb-0"> le contenue de platforme est bien organizer</p>
+				  <footer class="blockquote-footer">Oumair Yacine</footer>
+				</blockquote>
+			</div>
+		</div>
+	</div>
+{% endblock %}

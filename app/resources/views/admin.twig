@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ base_url() }}/app/resources/img/favicon.png">
+    <title> {{ page.title }} </title>
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/summernote-bs4.css">
+	<link rel="stylesheet" type="text/css" href="{{ base_url() }}/app/resources/css/all.css">
+</head>
+<body>
+    {% include 'partials/flash.twig' %}
+    {% include 'partials/navigation.twig' %}
+	<div class="container">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><i class="fas fa-home"></i></li>
+	    	<li class="breadcrumb-item">Administration</li>
+		</ol>
+		<h3 class="font-weight-bold"><i class="fas fa-chart-bar pr-3"></i>Statistique</h3>
+		<div class="row">
+			<div class="menu col-3">
+				<div class="card  mb-3" style="max-width: 20rem;">
+				<div class="card-header font-weight-bold"><i class="fas fa-users px-3"></i>Utilisateurs Total</div>
+				<div class="card-body">
+					<h1 class="px-3">{{ s4 }}</h1>
+					<p class="px-3 font-weight-bold secondary">Users</p>
+				</div>
+				</div>
+			</div>
+			<div class="content col-3">
+				<div class="card  mb-3" style="max-width: 20rem;">
+				<div class="card-header font-weight-bold"><i class="fas fa-book-reader px-3"></i>Cours Total</div>
+				<div class="card-body">
+					<h1 class="px-3">{{ s1 }}</h1>
+					<p class="px-3 font-weight-bold secondary">Cours</p>
+				</div>
+				</div>
+			</div>
+			<div class="content col-3">
+				<div class="card  mb-3" style="max-width: 20rem;">
+				<div class="card-header font-weight-bold"><i class="fas fa-info px-3"></i>Sujects Total</div>
+				<div class="card-body">
+					<h1 class="px-3">{{ s2 }}</h1>
+					<p class="px-3 font-weight-bold secondary">Suject</p>
+				</div>
+				</div>
+			</div>
+			<div class="content col-3">
+				<div class="card  mb-3" style="max-width: 20rem;">
+				<div class="card-header font-weight-bold"><i class="fas fa-comment-dots px-3"></i>Comments Total</div>
+				<div class="card-body">
+					<h1 class="px-3">{{ s3 }}</h1>
+					<p class="px-3 font-weight-bold secondary">Comment</p>
+				</div>
+				</div>
+			</div>
+		</div>	
+		<h3 class="font-weight-bold"><i class="fas fa-user-circle pr-3"></i>membres</h3>
+		<table class="table table-hover">
+		<thead>
+			<tr class="table-primary ">
+			<th scope="col"><i class="fas fa-hashtag"></i></th>
+			<th scope="col">ImageProfil</th>
+			<th scope="col">PsudoNom</th>
+			<th scope="col">Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in u %}
+				<tr>
+				<th scope="row"></th>
+				<td><img class="rounded-circle" src="{{ base_url() }}/app/resources/profil/{{ user.user_img }}" alt="user_img" width="32" height="32"></td>
+				<td>{{ user.user_name }}</td>
+				<td>{{ user.user_email }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		</table> 
+		<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#my-modal" id="btn-suject"><i class="fas fa-plus-square px-2"></i></i>Ajouter un cour</button>
+		<div class="modal fade " id="my-modal">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title text-dark">Cours</h4>
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		      </div>
+		      <div class="modal-body">
+		        <form method="post" action="/add/cours">
+		        	<div class="form-group row">
+		        		<label for="input1" class="col-sm-3 col-form-label text-muted" >Titre <span class="text-danger">*</span> </label>
+		        		<div class="col-sm-9">
+		        			<input name="titre" class="form-control" id="input1" type="text" required>
+		        		</div>
+		        	</div>
+					<div class="form-group row">
+		        		<label for="input1" class="col-sm-3 col-form-label text-muted" >Description <span class="text-danger">*</span></label>
+		        		<div class="col-sm-9">
+		        			<input class="form-control" type="text" name="desc" required>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<label for="input1" class="col-sm-3 col-form-label text-muted" >Détaile <span class="text-danger">*</span></label>
+		        		<div class="col-sm-9">
+		        			<textarea class="form-control" name="content" rows="20" id="texteditor"></textarea>
+		        		</div>
+		        	</div>
+		        	<div class="form-group row">
+		        		<p class="col-sm-3 text-muted"><span class="text-danger">*</span> champ obligatoire</p>
+		        	</div>		        	
+		        	<div class="form-group">
+		        		<input class="text-center col-sm-12 btn btn-warning" type="submit" value="Poser">
+		        	</div>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+	</div>
+    {% include 'partials/footer.twig' %}
+	<script src="{{ base_url() }}/app/resources/js/jquery.js"></script>
+	<script src="{{ base_url() }}/app/resources/js/bootstrap.js"></script>
+	<script src="{{ base_url() }}/app/resources/js/summernote-bs4.js"></script>
+	{% block script %}
+		<script>
+		$(document).ready(
+			$('#btn-suject').click(function() {
+				$('#texteditor').summernote({
+					  	toolbar: [
+					    // [groupName, [list of button]]
+					    ['style', ['bold', 'italic', 'underline', 'clear']],
+					    ['font', ['strikethrough', 'superscript', 'subscript']],
+					    ['fontsize', ['fontsize']],
+					    ['color', ['color']],
+					    ['para', ['ul', 'ol', 'paragraph']],
+					    ['height', ['height']]
+					  ]
+					}
+				);
+			})
+		);
+	</script>
+	{% endblock %}
+</body>
